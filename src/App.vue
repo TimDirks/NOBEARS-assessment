@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="text-xl text-center m-0 text-red">
+        <div class="text-center text-xl">
             Tim's assessment!
         </div>
 
