@@ -1,63 +1,31 @@
-# Nuxt 3 Minimal Starter
+# This is Tim's solution based on NOBEARS' assessment case.
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+To get an overview of how this solution was build step-by-step, take a look at the [list of PR's][1] from oldest to newest.
+This should give a timeline of what features were build in what order.
 
-## Setup
+## Preview development mode
 
-Make sure to install the dependencies:
+To run it, make sure the dependencies are installed before starting the development server.
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
 yarn install
-```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
 yarn dev
 ```
 
-## Production
+## Preview production mode
 
-Build the application for production:
+To see the production build, run the build command before the preview command.
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
 yarn build
-```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
 yarn preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## The assignment
+
+For more details about the assignment, see the ``NOBEARS-sollicitatie-opdracht.pdf`` file for the full explanation.
+
+
+[1]: https://github.com/TimDirks/NOBEARS-assessment/pulls?q=is%3Apr+is%3Aclosed+sort%3Acreated-asc
