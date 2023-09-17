@@ -30,13 +30,5 @@ const getJobs = async() => {
     const jobs = new Job();
 
     result.value = await jobs.fetch();
-    // result.value = await useFetch(
-    //     '/jobs',
-    //     {
-    //         method: 'POST',
-    //         body: {},
-    //         baseURL: 'https://data.pro-cluster.com',
-    //     },
-    // );
 };
 </script>

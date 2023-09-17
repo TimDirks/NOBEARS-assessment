@@ -16,7 +16,9 @@ export default defineNuxtConfig({
         },
     },
     runtimeConfig: {
-        apiEndpoint: '',
+        public: {
+            apiEndpoint: '',
+        },
     },
     srcDir: 'src',
 });

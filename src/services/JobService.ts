@@ -9,7 +9,7 @@ class Job {
         return await useFetch(
             this.endpoint,
             {
-                baseURL: useRuntimeConfig().apiEndpoint,
+                baseURL: useRuntimeConfig().public.apiEndpoint,
                 body: {},
                 method: 'POST',
             },
