@@ -15,5 +15,10 @@ export default defineNuxtConfig({
             tailwindcss: {},
         },
     },
+    runtimeConfig: {
+        public: {
+            apiEndpoint: '',
+        },
+    },
     srcDir: 'src',
 });
