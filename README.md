@@ -23,4 +23,9 @@ yarn build
 yarn preview
 ```
 
+## The assignment
+
+For more details about the assignment, see the ``NOBEARS-sollicitatie-opdracht.pdf`` file for the full explanation.
+
+
 [1]: https://github.com/TimDirks/NOBEARS-assessment/pulls?q=is%3Apr+is%3Aclosed+sort%3Acreated-asc
