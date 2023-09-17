@@ -6,6 +6,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:tailwindcss/recommended",
         "plugin:vue/vue3-essential"
     ],
     "parserOptions": {
@@ -15,6 +16,8 @@
     },
     "plugins": [
         "@typescript-eslint",
+        "tailwindcss",
+        "unused-imports",
         "vue"
     ],
     "rules": {
@@ -37,6 +40,11 @@
         "space-infix-ops": "error",
         "space-unary-ops": "error",
         "spaced-comment": "error",
+        "tailwindcss/classnames-order": "error",
+        "tailwindcss/enforces-negative-arbitrary-values": "error",
+        "tailwindcss/enforces-shorthand": "error",
+        "tailwindcss/migration-from-tailwind-2": "error",
+        "unused-imports/no-unused-imports-ts": "error",
         "vue/attributes-order": ["error", {"alphabetical": true}],
         "vue/html-indent": ["error", 4],
         "vue/multi-word-component-names": "off",

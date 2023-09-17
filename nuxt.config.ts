@@ -15,4 +15,5 @@ export default defineNuxtConfig({
             tailwindcss: {},
         },
     },
+    srcDir: 'src',
 });
