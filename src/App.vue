@@ -1,9 +1,5 @@
 <template>
-    <div>
-        <div class="text-center text-xl">
-            Tim's assessment!
-        </div>
-
-        <NuxtWelcome />
-    </div>
+    <NuxtLayout name="default">
+        <NuxtPage />
+    </NuxtLayout>
 </template>
