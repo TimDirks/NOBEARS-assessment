@@ -2,7 +2,7 @@
     <main class="font-body">
         <Hero />
 
-        <div class="container mx-auto bg-green-500">
+        <div class="container mx-auto">
             <slot />
         </div>
     </main>
