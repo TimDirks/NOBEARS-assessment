@@ -27,5 +27,7 @@ yarn preview
 
 For more details about the assignment, see the ``NOBEARS-sollicitatie-opdracht.pdf`` file for the full explanation.
 
+Whilst working on this assignment, I came across a few things that I thought could've been set up different. To read those, check out `assignment-feedback.md`
+
 
 [1]: https://github.com/TimDirks/NOBEARS-assessment/pulls?q=is%3Apr+is%3Aclosed+sort%3Acreated-asc
