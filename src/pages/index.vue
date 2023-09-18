@@ -15,20 +15,31 @@
             Fetch API
         </button>
 
-        {{ result }}
+        <div
+            v-for="item in items"
+            :key="item.slug"
+        >
+            {{ item.title }}
+        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import Hero from '@/components/common/Hero.vue';
-import {Job} from '@/services/JobService';
+import {Jobs} from '@/services/JobsService';
 import {ref} from 'vue';
 
-const result = ref();
+const jobs = new Jobs();
+const items = ref();
 
 const getJobs = async() => {
-    const jobs = new Job();
+    const {hits} = await jobs.get(
+        {
+            aggs: true,
+        },
+        'POST',
+    );
 
-    result.value = await jobs.fetch();
+    items.value = hits;
 };
 </script>
