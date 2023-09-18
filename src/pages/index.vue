@@ -1,16 +1,10 @@
 <template>
     <div>
-        This is the homepage
-
-        <div class="text-center text-xl">
-            Tim's assessment!
-        </div>
-
         <button
             class="border px-4 py-2"
             @click="getJobs"
         >
-            Fetch API
+            Fetch Jobs
         </button>
 
         <JobList :jobs="items" />
