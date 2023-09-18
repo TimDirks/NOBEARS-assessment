@@ -1,7 +1,5 @@
 <template>
     <div>
-        <Hero />
-
         This is the homepage
 
         <div class="text-center text-xl">
@@ -25,7 +23,6 @@
 </template>
 
 <script lang="ts" setup>
-import Hero from '@/components/common/Hero.vue';
 import {Jobs} from '@/services/JobsService';
 import {ref} from 'vue';
 

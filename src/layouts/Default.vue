@@ -1,7 +1,13 @@
 <template>
-    <main>
+    <main class="font-body">
+        <Hero />
+
         <div class="container mx-auto bg-green-500">
             <slot />
         </div>
     </main>
 </template>
+
+<script lang="ts" setup>
+import Hero from '@/components/common/Hero.vue';
+</script>
