@@ -1,20 +1,23 @@
-interface JobData {
-    hits: Record<string, never>;
+import Service from '@/services/Service';
+
+interface LocationData {
+    text: string;
+    place: string;
+    province: string;
 }
 
-class Job {
-    endpoint = 'jobs';
+interface JobData {
+    label?: string;
+    title: string;
+    subtitle: string;
+    location: LocationData;
+    intro: string;
+    sector: string[];
+    category: string[];
+}
 
-    async fetch(): Promise<Job> {
-        return await useFetch(
-            this.endpoint,
-            {
-                baseURL: useRuntimeConfig().public.apiEndpoint,
-                body: {},
-                method: 'POST',
-            },
-        );
-    }
+class Job extends Service<JobData> {
+    endpoint = 'jobs';
 }
 
 export {Job, JobData};

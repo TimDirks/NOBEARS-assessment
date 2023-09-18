@@ -29,6 +29,12 @@ const result = ref();
 const getJobs = async() => {
     const jobs = new Job();
 
-    result.value = await jobs.fetch();
+    // result.value = await jobs.fetch();
+    result.value = await jobs.get(
+        {
+            aggs: true,
+        },
+        'POST',
+    );
 };
 </script>
