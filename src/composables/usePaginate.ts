@@ -19,25 +19,28 @@ const defaultParams = {
 const usePaginate = <S extends Service>(service: S, customParams: Params = {}) => {
     const {result: paginated, run, state} = useService(service, 'get');
 
-    paginated.value = structuredClone(defaultPaginated) as Awaited<ReturnType<S['get']>>;
+    paginated.value = defaultPaginated as Awaited<ReturnType<S['get']>>;
+    // paginated.value = structuredClone(defaultPaginated) as Awaited<ReturnType<S['get']>>;
 
     const items = ref<Awaited<ReturnType<S['get']>>['hits']>([] as Awaited<ReturnType<S['get']>>['hits']);
 
     const params = ref<Params>({
         ...defaultParams,
-        ...structuredClone(customParams),
+        ...customParams,
+        // ...structuredClone(customParams),
     });
 
     const clear = () => {
         items.value = [];
 
-        paginated.value = structuredClone(defaultPaginated);
+        paginated.value = defaultPaginated;
+        // paginated.value = structuredClone(defaultPaginated);
 
-        params.value.currentPage = 0;
+        params.value.pagenum = 0;
     };
 
     const paginate = () => {
-        params.value.currentPage++;
+        params.value.pagenum++;
 
         return run(params.value);
     };
@@ -67,9 +70,12 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
     watch(
         () => paginated.value?.hits,
         (hits) => {
+            console.log('Truiggers');
             items.value = [
-                ...structuredClone(items.value),
-                ...structuredClone(hits),
+                ...items.value,
+                // ...structuredClone(items.value),
+                ...hits,
+                // ...structuredClone(hits),
             ];
         },
     );
@@ -82,6 +88,7 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
         params,
         refresh,
         state,
+        run,
     };
 };
 

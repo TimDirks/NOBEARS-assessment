@@ -1,5 +1,7 @@
 <template>
-    <JobsList :jobs="paginated" />
+    <button @click="paginate">Paginate more</button>
+
+    <JobsList :jobs="paginated.hits" />
 </template>
 
 <script lang="ts" setup>

@@ -31,13 +31,14 @@ export default abstract class Service<C = never> {
     /**
      * Retrieves multiple resources.
      */
-    async get(params: Params, method: string = 'GET'): Promise<Paginated<C>> {
+    async get(params: Params, method: string = 'POST'): Promise<Paginated<C>> {
         const response = await useFetch(
             this.endpoint,
             {
                 baseURL: useRuntimeConfig().public.apiEndpoint,
                 method,
                 body: params,
+                watch: false,
             },
         );
 
