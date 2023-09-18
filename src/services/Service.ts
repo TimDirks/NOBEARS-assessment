@@ -3,6 +3,7 @@ import {IAggregation} from '@/types/Aggregation';
 export interface Paginated<T> {
     aggregations: IAggregation;
     currentPage: number;
+    totalPages: number;
     hits: T[];
     total: number;
 }
@@ -46,9 +47,13 @@ export default abstract class Service<C = never> {
         // Convert the returned hits to class instances.
         const hits = result.hits.map(item => this.cast(item));
 
+        // Calculate the total pages (10 is the default page size).
+        const totalPages = Math.ceil(result.total / (params.perpage || 10));
+
         return {
             aggregations,
             currentPage: params.pagenum || 1,
+            totalPages,
             hits,
             total: result.total,
         } as Paginated<C>;

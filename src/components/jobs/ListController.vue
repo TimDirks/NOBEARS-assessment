@@ -1,18 +1,14 @@
 <template>
-    <JobsList :jobs="items" />
+    <JobsList :jobs="paginated" />
 </template>
 
 <script lang="ts" setup>
 import JobsList from '@/components/jobs/List.vue';
-import {Params} from '@/services/Service';
-import {PropType} from 'vue';
+import {JobsService} from '@/services/JobsService';
 
-defineProps({
-    defaultParams: {
-        type: Object as PropType<Params>,
-        default: () => ({} as Params),
-    },
-});
+const {paginated, paginate} = usePaginate(
+    new JobsService,
+);
 
-const items = [];
+await paginate();
 </script>
