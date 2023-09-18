@@ -49,4 +49,8 @@ class Jobs extends Service<Job> {
     }
 }
 
-export {Jobs, JobData};
+export {
+    Job,
+    JobData,
+    Jobs,
+};

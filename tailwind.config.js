@@ -9,7 +9,15 @@ export default {
         './nuxt.config.{js,ts}',
     ],
     theme: {
-        extend: {},
+        extend: {
+            backgroundImage: {
+                'hero-banner': 'url(\'@/assets/img/iceland-banner.jpg\')',
+            },
+            fontFamily: {
+                body: ['Roboto Mono', 'sans-serif'],
+                title: ['Poppins', 'sans-serif'],
+            },
+        },
     },
     plugins: [],
 };
