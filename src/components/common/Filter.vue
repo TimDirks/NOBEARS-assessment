@@ -5,31 +5,14 @@
         </div>
 
         <div class="mb-2 space-y-1">
-            <div
+            <FilterOption
                 v-for="bucket in sortedBuckets"
                 :key="`${filter.meta.pname}-bucket-${bucket.position}`"
-                class="mx-2 flex rounded px-2 transition-colors hover:bg-gray-100"
-            >
-                <input
-                    :id="`${filter.meta.pname}-${bucket.key}`"
-                    :checked="isChecked(bucket.key)"
-                    class="me-2 w-4 cursor-pointer"
-                    type="checkbox"
-                    :value="bucket.key"
-                    @change="onUpdateModelValue(bucket.key)"
-                >
-
-                <label
-                    class="flex grow cursor-pointer items-center justify-between"
-                    :for="`${filter.meta.pname}-${bucket.key}`"
-                >
-                    {{ bucket.key }}
-
-                    <span class="ms-auto text-xs text-gray-500">
-                        ({{ bucket.doc_count }})
-                    </span>
-                </label>
-            </div>
+                :bucket="bucket"
+                :checked="isChecked(bucket.key)"
+                class="mx-2"
+                @change="onUpdateModelValue(bucket.key)"
+            />
         </div>
 
         <div
@@ -45,6 +28,7 @@
 <script lang="ts" setup>
 import {IBucket, IFilter} from '@/types/Filter';
 import {PropType, computed, ref, watch} from 'vue';
+import FilterOption from '@/components/common/FilterOption.vue';
 
 const showMore = ref<boolean>(false);
 

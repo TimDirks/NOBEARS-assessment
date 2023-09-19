@@ -1,16 +1,12 @@
 <template>
-    <div>
-        Aggregation Options
-
-        <div class="space-y-4">
-            <Filter
-                v-for="option in aggregationOption"
-                :key="`aggregation-${option.name}`"
-                :filter="option.filter"
-                :model-value="mValue[option.filter.meta.pname]"
-                @update:model-value="onUpdateModelValue($event, option.filter.meta.pname)"
-            />
-        </div>
+    <div class="space-y-4">
+        <Filter
+            v-for="option in aggregationOption"
+            :key="`aggregation-${option.name}`"
+            :filter="option.filter"
+            :model-value="mValue[option.filter.meta.pname]"
+            @update:model-value="onUpdateModelValue($event, option.filter.meta.pname)"
+        />
     </div>
 </template>
 
