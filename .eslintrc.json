@@ -7,8 +7,12 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:tailwindcss/recommended",
-        "plugin:vue/vue3-essential"
+        "plugin:vue/vue3-essential",
+        "plugin:vue/vue3-strongly-recommended"
     ],
+    "globals": {
+        "usePaginate": "readonly"
+    },
     "parserOptions": {
         "ecmaVersion": "latest",
         "parser": "@typescript-eslint/parser",

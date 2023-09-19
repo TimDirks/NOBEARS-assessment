@@ -7,6 +7,8 @@ This should give a timeline of what features were build in what order.
 
 To run it, make sure the dependencies are installed before starting the development server.
 
+Keep in mind, at least Node version 17 or higher is required.
+
 ```bash
 yarn install
 
@@ -26,6 +28,8 @@ yarn preview
 ## The assignment
 
 For more details about the assignment, see the ``NOBEARS-sollicitatie-opdracht.pdf`` file for the full explanation.
+
+Whilst working on this assignment, I came across a few things that I thought could've been set up different. To read those, check out `assignment-feedback.md`
 
 
 [1]: https://github.com/TimDirks/NOBEARS-assessment/pulls?q=is%3Apr+is%3Aclosed+sort%3Acreated-asc

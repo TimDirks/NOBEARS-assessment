@@ -35,7 +35,7 @@ class Job implements JobData {
     }
 }
 
-class Jobs extends Service<Job> {
+class JobsService extends Service<Job> {
     endpoint = 'jobs';
 
     cast(data: never): Job {
@@ -52,5 +52,5 @@ class Jobs extends Service<Job> {
 export {
     Job,
     JobData,
-    Jobs,
+    JobsService,
 };
