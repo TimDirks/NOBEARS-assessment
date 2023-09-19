@@ -69,17 +69,23 @@
                 </div>
             </div>
         </div>
+
+        <ClientOnly>
+            <Confetti :watched-value="params.q" />
+        </ClientOnly>
     </div>
 </template>
 
 <script lang="ts" setup>
 import {computed, watch} from 'vue';
+import Confetti from '@/components/common/Confetti.vue';
 import DebounceInput from '@/components/common/DebounceInput.vue';
 import FilterGroup from '@/components/common/FilterGroup.vue';
 import JobsList from '@/components/jobs/List.vue';
 import {JobsService} from '@/services/JobsService';
 import PaginationControls from '@/components/common/PaginationControls.vue';
 import Spinner from '@/components/common/Spinner.vue';
+// import confetti from 'canvas-confetti';
 
 const {
     goToPage,
@@ -95,6 +101,14 @@ const {
 );
 
 await goToPage(1);
+
+// setTimeout(() => {
+//     confetti({
+//         particleCount: 100,
+//         spread: 70,
+//         origin: {y: 0.6},
+//     });
+// }, 1000);
 
 const hasFiltersActive = computed(() => {
     const hasActiveAggregation = Object.entries(params.value.f)
