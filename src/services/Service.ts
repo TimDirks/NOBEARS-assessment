@@ -9,6 +9,7 @@ export interface Paginated<T> {
 }
 
 export interface Params {
+    aggs?: boolean;
     f?: Record<string, string[]>;
     pagenum?: number;
     perpage?: number;

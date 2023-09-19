@@ -15,4 +15,7 @@ interface IFilter {
     buckets: IBucket[];
 }
 
-export {IFilter};
+export {
+    IBucket,
+    IFilter,
+};

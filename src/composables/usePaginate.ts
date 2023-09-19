@@ -10,6 +10,7 @@ const defaultPaginated = {
 };
 
 const defaultParams = {
+    aggs: true,
     pagenum: 1,
     perpage: 10,
     f: {},
