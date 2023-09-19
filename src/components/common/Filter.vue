@@ -1,5 +1,5 @@
 <template>
-    <div class="rounded-lg border border-gray-300 py-2">
+    <div class="rounded-lg border py-2">
         <div class="mx-4 mb-2 text-lg font-bold">
             {{ filter.meta.label }}
         </div>
