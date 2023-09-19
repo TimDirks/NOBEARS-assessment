@@ -16,24 +16,30 @@ const defaultParams = {
     q: '',
 };
 
+/**
+ * The usePaginate composable can be seen as a wrapper around the normal 'get' function from the useService composable.
+ * This composable adds pagination features by keeping track of which page should be fetched, how many hits per page
+ * and returns the hits of the current page.
+ * It does this by calling the normal 'get' function with added parameters to get the desired result.
+ *
+ * @param service
+ * @param customParams
+ */
 const usePaginate = <S extends Service>(service: S, customParams: Params = {}) => {
     const {result: paginated, run, state} = useService(service, 'get');
 
     paginated.value = structuredClone(defaultPaginated) as Awaited<ReturnType<S['get']>>;
-
-    const items = ref<Awaited<ReturnType<S['get']>>['hits']>([] as Awaited<ReturnType<S['get']>>['hits']);
 
     const params = ref<Params>({
         ...defaultParams,
         ...structuredClone(customParams),
     });
 
+    // Reset the pagination values to their default.
     const clear = () => {
-        items.value = [];
-
         paginated.value = structuredClone(defaultPaginated);
 
-        params.value.pagenum = 0;
+        params.value.pagenum = 1;
     };
 
     // Go to a specific page number.
@@ -62,15 +68,17 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
         goToPage(params.value.pagenum + 1);
     };
 
+    // Function to basically return all the variables to their default.
     const refresh = () => {
         clear();
 
         Object.keys(state)
             .forEach(k => state[k] = false);
 
-        return nextPage();
+        return goToPage(1);
     };
 
+    // Whenever any of the filters change, the pagination needs to be triggered again with clean values.
     watch(
         () => params.value.f,
         refresh,
@@ -84,20 +92,9 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
         refresh,
     );
 
-    watch(
-        () => paginated.value?.hits,
-        (hits) => {
-            items.value = [
-                ...items.value,
-                ...hits,
-            ];
-        },
-    );
-
     return {
         clear,
         goToPage,
-        items,
         nextPage,
         paginated,
         params,

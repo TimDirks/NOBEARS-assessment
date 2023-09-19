@@ -30,6 +30,9 @@ export default abstract class Service<C = never> {
 
     /**
      * Retrieves multiple resources.
+     * Assignment note: normally a function called 'get' would also use the 'GET' request method
+     * but for this use case we only need to make 1 request which happens to be a 'POST' but still
+     * acts as a 'GET' request. For more info, see 'assignment-feedback.md'.
      */
     async get(params: Params, method: string = 'POST'): Promise<Paginated<C>> {
         const response = await useFetch(
