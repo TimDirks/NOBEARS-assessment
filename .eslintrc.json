@@ -9,6 +9,9 @@
         "plugin:tailwindcss/recommended",
         "plugin:vue/vue3-essential"
     ],
+    "globals": {
+        "usePaginate": "readonly"
+    },
     "parserOptions": {
         "ecmaVersion": "latest",
         "parser": "@typescript-eslint/parser",

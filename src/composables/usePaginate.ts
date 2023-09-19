@@ -22,6 +22,8 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
     paginated.value = defaultPaginated as Awaited<ReturnType<S['get']>>;
     // paginated.value = structuredClone(defaultPaginated) as Awaited<ReturnType<S['get']>>;
 
+    const hasMorePages = computed(() => params.value.pagenum !== paginated.value.totalPages);
+
     const items = ref<Awaited<ReturnType<S['get']>>['hits']>([] as Awaited<ReturnType<S['get']>>['hits']);
 
     const params = ref<Params>({
@@ -39,10 +41,30 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
         params.value.pagenum = 0;
     };
 
-    const paginate = () => {
-        params.value.pagenum++;
+    // Go to a specific page number.
+    const goToPage = (page: number) => {
+        if (page < 0) {
+            return;
+        }
+
+        params.value.pagenum = page;
 
         return run(params.value);
+    };
+
+    // Go to the previous page.
+    const prevPage = () => {
+        // Don't try to go to an out-of-range page
+        if (params.value.pagenum < 1) {
+            return;
+        }
+
+        goToPage(params.value.pagenum - 1);
+    };
+
+    // Go to the next page.
+    const nextPage = () => {
+        goToPage(params.value.pagenum + 1);
     };
 
     const refresh = () => {
@@ -51,7 +73,7 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
         Object.keys(state)
             .forEach(k => state[k] = false);
 
-        return paginate();
+        return nextPage();
     };
 
     watch(
@@ -70,7 +92,6 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
     watch(
         () => paginated.value?.hits,
         (hits) => {
-            console.log('Truiggers');
             items.value = [
                 ...items.value,
                 // ...structuredClone(items.value),
@@ -82,10 +103,13 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
 
     return {
         clear,
+        goToPage,
+        hasMorePages,
         items,
-        paginate,
+        nextPage,
         paginated,
         params,
+        prevPage,
         refresh,
         state,
         run,

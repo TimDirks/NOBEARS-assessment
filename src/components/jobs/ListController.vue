@@ -1,5 +1,5 @@
 <template>
-    <button @click="paginate">Paginate more</button>
+    <button @click="nextPage">Paginate more</button>
 
     <JobsList :jobs="paginated.hits" />
 </template>
@@ -8,9 +8,9 @@
 import JobsList from '@/components/jobs/List.vue';
 import {JobsService} from '@/services/JobsService';
 
-const {paginated, paginate} = usePaginate(
+const {paginated, nextPage} = usePaginate(
     new JobsService,
 );
 
-await paginate();
+await nextPage();
 </script>
