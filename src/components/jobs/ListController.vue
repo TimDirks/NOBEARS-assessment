@@ -69,11 +69,16 @@
                 </div>
             </div>
         </div>
+
+        <ClientOnly>
+            <Confetti :watched-value="params.q" />
+        </ClientOnly>
     </div>
 </template>
 
 <script lang="ts" setup>
 import {computed, watch} from 'vue';
+import Confetti from '@/components/common/Confetti.vue';
 import DebounceInput from '@/components/common/DebounceInput.vue';
 import FilterGroup from '@/components/common/FilterGroup.vue';
 import JobsList from '@/components/jobs/List.vue';
