@@ -1,11 +1,11 @@
 <template>
-    <ol>
+    <div class="space-y-4">
         <JobListItem
             v-for="job of jobs"
             :key="job.slug"
             :job="job"
         />
-    </ol>
+    </div>
 </template>
 
 <script lang="ts" setup>

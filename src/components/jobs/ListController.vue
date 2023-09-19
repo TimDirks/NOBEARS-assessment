@@ -13,7 +13,10 @@
                     placeholder="Search on Job Title or keyword..."
                 />
 
-                <Btn @click="reset">
+                <Btn
+                    :disabled="!hasFiltersActive"
+                    @click="reset"
+                >
                     Reset filters
                 </Btn>
             </div>
@@ -25,9 +28,22 @@
                 <Spinner class="inline-block" />
             </div>
 
-            <div :class="{invisible: state.loading}">
-                <div class="mb-4 font-title text-4xl">
-                    Vacancies
+            <div
+                v-if="state.error"
+                class="mt-12 italic text-red-500"
+            >
+                Something went wrong! Please don't sue me, I'm merely a website.
+            </div>
+
+            <div :class="{invisible: !state.success}">
+                <div class="mb-4 flex items-end">
+                    <div class="grow font-title text-4xl">
+                        Vacancies
+                    </div>
+
+                    <div class="text-sm text-gray-500">
+                        {{ paginated.total }} matches found
+                    </div>
                 </div>
 
                 <div v-show="paginated.hits.length">
@@ -45,7 +61,10 @@
                     />
                 </div>
 
-                <div v-if="!paginated.hits.length">
+                <div
+                    v-if="!paginated.hits.length"
+                    class="italic"
+                >
                     We couldn't find any results matching your search criteria.
                 </div>
             </div>
@@ -60,10 +79,27 @@ import JobsList from '@/components/jobs/List.vue';
 import {JobsService} from '@/services/JobsService';
 import PaginationControls from '@/components/common/PaginationControls.vue';
 import Spinner from '@/components/common/Spinner.vue';
+import {computed} from 'vue';
 
-const {goToPage, nextPage, paginated, params, prevPage, reset, state} = usePaginate(
+const {
+    goToPage,
+    nextPage,
+    paginated,
+    params,
+    prevPage,
+    reset,
+    state,
+} = usePaginate(
     new JobsService,
 );
 
 await goToPage(1);
+
+const hasFiltersActive = computed(() => {
+    const hasActiveAggregation = Object.entries(params.value.f)
+        .find(([, value]) => value.length) !== undefined;
+
+    return hasActiveAggregation
+        || !!params.value.q;
+});
 </script>

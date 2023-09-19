@@ -1,6 +1,6 @@
 <template>
     <div>
-        <JobListController class="my-4" />
+        <JobListController />
     </div>
 </template>
 

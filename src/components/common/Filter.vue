@@ -1,18 +1,30 @@
 <template>
-    <div class="rounded-lg border border-gray-300 py-2">
+    <div class="rounded-lg border py-2">
         <div class="mx-4 mb-2 text-lg font-bold">
             {{ filter.meta.label }}
         </div>
 
-        <div class="mb-2 space-y-1">
-            <FilterOption
-                v-for="bucket in sortedBuckets"
-                :key="`${filter.meta.pname}-bucket-${bucket.position}`"
-                :bucket="bucket"
-                :checked="isChecked(bucket.key)"
-                class="mx-2"
-                @change="onUpdateModelValue(bucket.key)"
-            />
+        <div class="mb-2">
+            <div
+                v-if="shownBuckets.length"
+                class="space-y-1"
+            >
+                <FilterOption
+                    v-for="bucket in shownBuckets"
+                    :key="`${filter.meta.pname}-bucket-${bucket.position}`"
+                    :bucket="bucket"
+                    :checked="isChecked(bucket.key)"
+                    class="mx-2"
+                    @change="onUpdateModelValue(bucket.key)"
+                />
+            </div>
+
+            <div
+                v-else
+                class="mx-4 italic"
+            >
+                No options found for this filter
+            </div>
         </div>
 
         <div
@@ -71,18 +83,22 @@ const onUpdateModelValue = (bucketKey: string) => {
     emit('update:modelValue', mValue.value);
 };
 
-const canShowMore = computed(() => props.filter.buckets.length > props.minFiltersShown);
-
 const sortedBuckets = computed(() => {
     const {buckets} = props.filter;
 
-    const sortedBuckets = buckets
+    return buckets
         .filter((bucket: IBucket) => bucket.position != null)
         .sort((bucketA: IBucket, bucketB: IBucket) => bucketA.position - bucketB.position);
+});
 
+const shownBuckets = computed(() => {
     return showMore.value
-        ? sortedBuckets
-        : sortedBuckets.slice(0, props.minFiltersShown);
+        ? sortedBuckets.value
+        : sortedBuckets.value.slice(0, props.minFiltersShown);
+});
+
+const canShowMore = computed(() => {
+    return sortedBuckets.value.length > props.minFiltersShown;
 });
 
 const toggleShowMore = () => {
