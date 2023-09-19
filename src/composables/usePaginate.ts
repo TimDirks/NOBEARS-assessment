@@ -84,6 +84,16 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
         return goToPage(1);
     };
 
+    // Function to return all the pagination variables to their default.
+    const reset = () => {
+        params.value = {
+            ...defaultParams,
+            ...structuredClone(customParams),
+        };
+
+        refresh(true);
+    };
+
     // Whenever any of the filters change, the pagination needs to be triggered again with clean values.
     watch(
         () => params.value.f,
@@ -110,6 +120,7 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
         params,
         prevPage,
         refresh,
+        reset,
         state,
         run,
     };
