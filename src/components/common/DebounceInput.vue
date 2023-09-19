@@ -1,15 +1,14 @@
 <template>
     <input
-        class="rounded-full border px-4 py-2"
+        class="rounded border px-4 py-2 transition-colors focus:border-black focus:outline-0"
         type="text"
         :value="mValue"
-        @input="onUpdateModelValue"
+        @input="onUpdateModelValue($event.target.value)"
     >
 </template>
 
 <script lang="ts" setup>
 import {ref, watch} from 'vue';
-import {clearTimeout} from 'node:timers';
 
 const debouncedEmit = ref();
 
