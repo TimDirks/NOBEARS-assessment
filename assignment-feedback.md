@@ -20,6 +20,8 @@ In the response body of `POST /jobs` the filters are returned in the `aggregatio
 I believe this would be more suitable as an array of filter objects. An array would allow easier looping over the filters and it's much less overhead should a filter get added/removed.
 If I want to fetch the filters now, I have to either predefine what keys to look for in the `aggregations` or use an ambiguous `[key: string]: <filterObject>` property to still allow flexible adding/removing filters.
 
+Furthermore, the `aggregations` don't keep their order as soon as you make the `POST` request with passed filters. This results in the UI having to order the different filter options which should've been something the API handled in my opinion.
+
 ### Missing pagination information
 
 When the jobs are fetched, in the body query we can supply pagination details to get a specific selection of jobs.

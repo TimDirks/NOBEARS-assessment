@@ -16,7 +16,7 @@
                     class="me-2 w-4 cursor-pointer"
                     type="checkbox"
                     :value="bucket.key"
-                    @change="onCheckFilter(bucket.key)"
+                    @change="onUpdateModelValue(bucket.key)"
                 >
 
                 <label
@@ -75,7 +75,7 @@ watch(
 
 const isChecked = (bucketKey: string) => mValue.value.includes(bucketKey);
 
-const onCheckFilter = (bucketKey: string) => {
+const onUpdateModelValue = (bucketKey: string) => {
     const index = mValue.value.indexOf(bucketKey);
 
     if (index === -1) {
@@ -92,7 +92,9 @@ const canShowMore = computed(() => props.filter.buckets.length > props.minFilter
 const sortedBuckets = computed(() => {
     const {buckets} = props.filter;
 
-    const sortedBuckets = buckets.sort((bucketA: IBucket, bucketB: IBucket) => bucketA.position - bucketB.position);
+    const sortedBuckets = buckets
+        .filter((bucket: IBucket) => bucket.position != null)
+        .sort((bucketA: IBucket, bucketB: IBucket) => bucketA.position - bucketB.position);
 
     return showMore.value
         ? sortedBuckets
