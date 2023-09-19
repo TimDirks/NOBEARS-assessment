@@ -86,10 +86,7 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
 
     // Function to return all the pagination variables to their default.
     const reset = () => {
-        params.value = {
-            ...defaultParams,
-            ...structuredClone(customParams),
-        };
+        params.value = structuredClone(defaultParams);
 
         refresh(true);
     };

@@ -73,13 +73,13 @@
 </template>
 
 <script lang="ts" setup>
+import {computed, watch} from 'vue';
 import DebounceInput from '@/components/common/DebounceInput.vue';
 import FilterGroup from '@/components/common/FilterGroup.vue';
 import JobsList from '@/components/jobs/List.vue';
 import {JobsService} from '@/services/JobsService';
 import PaginationControls from '@/components/common/PaginationControls.vue';
 import Spinner from '@/components/common/Spinner.vue';
-import {computed} from 'vue';
 
 const {
     goToPage,
@@ -91,6 +91,7 @@ const {
     state,
 } = usePaginate(
     new JobsService,
+    getRouteQueryParams(),
 );
 
 await goToPage(1);
@@ -102,4 +103,21 @@ const hasFiltersActive = computed(() => {
     return hasActiveAggregation
         || !!params.value.q;
 });
+
+watch(
+    [
+        () => params.value.q,
+        () => params.value.f,
+    ],
+    () => {
+        // Only the query and filters need to be pushed to the route query.
+        setRouteQueryParams({
+            q: params.value.q,
+            f: params.value.f,
+        });
+    },
+    {
+        deep: true,
+    },
+);
 </script>

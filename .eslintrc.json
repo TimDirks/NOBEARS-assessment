@@ -11,7 +11,11 @@
         "plugin:vue/vue3-strongly-recommended"
     ],
     "globals": {
-        "usePaginate": "readonly"
+        "getRouteQueryParams": "readonly",
+        "setRouteQueryParams": "readonly",
+        "usePaginate": "readonly",
+        "useRoute": "readonly",
+        "useRouter": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": "latest",
