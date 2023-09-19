@@ -36,8 +36,14 @@
             </div>
 
             <div :class="{invisible: !state.success}">
-                <div class="mb-4 font-title text-4xl">
-                    Vacancies
+                <div class="mb-4 flex items-end">
+                    <div class="grow font-title text-4xl">
+                        Vacancies
+                    </div>
+
+                    <div class="text-sm text-gray-500">
+                        {{ paginated.total }} matches found
+                    </div>
                 </div>
 
                 <div v-show="paginated.hits.length">
