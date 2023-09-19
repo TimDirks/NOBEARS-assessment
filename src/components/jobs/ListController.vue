@@ -1,6 +1,9 @@
 <template>
     <div class="grid grid-cols-4">
-        <FilterGroup :aggregation="paginated.aggregations" />
+        <FilterGroup
+            v-model="params.f"
+            :aggregation="paginated.aggregations"
+        />
 
         <div class="col-span-3">
             <JobsList
@@ -25,7 +28,7 @@ import JobsList from '@/components/jobs/List.vue';
 import {JobsService} from '@/services/JobsService';
 import PaginationControls from '@/components/common/PaginationControls.vue';
 
-const {goToPage, nextPage, paginated, prevPage} = usePaginate(
+const {goToPage, nextPage, paginated, params, prevPage} = usePaginate(
     new JobsService,
 );
 

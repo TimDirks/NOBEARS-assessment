@@ -11,7 +11,7 @@ import {reactive, ref} from 'vue';
  * @param method
  */
 const useService = <
-    S extends Record<string, never>,
+    S extends Record<string, any>,
     M extends keyof S,
     >(service: S, method: M) => {
     // Create a state object which can be used in the UI to show the request states.
@@ -23,7 +23,7 @@ const useService = <
 
     const result = ref<Awaited<ReturnType<S[M]>>>();
 
-    const run = async(...args: never[]): Promise<Awaited<ReturnType<S[M]>>> => {
+    const run = async(...args: any[]): Promise<Awaited<ReturnType<S[M]>>> => {
         state.error = false;
         state.loading = true;
         state.success = false;

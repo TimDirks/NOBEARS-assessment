@@ -16,7 +16,7 @@ export interface Params {
     q?: string;
 }
 
-export default abstract class Service<C = never> {
+export default abstract class Service<C = any> {
     /**
      * The endpoint that is used to make HTTP requests.
      */
@@ -25,7 +25,7 @@ export default abstract class Service<C = never> {
     /**
      * Casts the given data to a desired result.
      */
-    cast(data: never): C {
+    cast(data: any): C {
         return data;
     }
 

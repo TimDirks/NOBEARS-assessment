@@ -12,8 +12,11 @@
             >
                 <input
                     :id="`${filter.meta.pname}-${bucket.key}`"
+                    :checked="isChecked(bucket.key)"
                     class="me-2 w-4 cursor-pointer"
                     type="checkbox"
+                    :value="bucket.key"
+                    @change="onCheckFilter(bucket.key)"
                 >
 
                 <label
@@ -41,7 +44,7 @@
 
 <script lang="ts" setup>
 import {IBucket, IFilter} from '@/types/Filter';
-import {PropType, computed, ref} from 'vue';
+import {PropType, computed, ref, watch} from 'vue';
 
 const showMore = ref<boolean>(false);
 
@@ -54,7 +57,35 @@ const props = defineProps({
         type: Number,
         default: 5,
     },
+    modelValue: {
+        type: Array as PropType<string[]>,
+        default: () => ([]),
+    },
 });
+
+const emit = defineEmits<{(e: 'update:modelValue', v: string[])}>();
+
+const mValue = ref<string[]>([]);
+
+watch(
+    () => props.modelValue,
+    v => mValue.value = [...v],
+    {immediate: true},
+);
+
+const isChecked = (bucketKey: string) => mValue.value.includes(bucketKey);
+
+const onCheckFilter = (bucketKey: string) => {
+    const index = mValue.value.indexOf(bucketKey);
+
+    if (index === -1) {
+        mValue.value.push(bucketKey);
+    } else {
+        mValue.value.splice(index, 1);
+    }
+
+    emit('update:modelValue', mValue.value);
+};
 
 const canShowMore = computed(() => props.filter.buckets.length > props.minFiltersShown);
 
