@@ -22,8 +22,6 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
     paginated.value = defaultPaginated as Awaited<ReturnType<S['get']>>;
     // paginated.value = structuredClone(defaultPaginated) as Awaited<ReturnType<S['get']>>;
 
-    const hasMorePages = computed(() => params.value.pagenum !== paginated.value.totalPages);
-
     const items = ref<Awaited<ReturnType<S['get']>>['hits']>([] as Awaited<ReturnType<S['get']>>['hits']);
 
     const params = ref<Params>({
@@ -104,7 +102,6 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
     return {
         clear,
         goToPage,
-        hasMorePages,
         items,
         nextPage,
         paginated,

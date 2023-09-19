@@ -1,16 +1,26 @@
 <template>
-    <button @click="nextPage">Paginate more</button>
+    <JobsList
+        class="mb-8"
+        :jobs="paginated.hits"
+    />
 
-    <JobsList :jobs="paginated.hits" />
+    <PaginationControls
+        :current-page="paginated.currentPage"
+        :total-pages="paginated.totalPages"
+        @go-to-page="goToPage"
+        @next-page="nextPage"
+        @previous-page="prevPage"
+    />
 </template>
 
 <script lang="ts" setup>
 import JobsList from '@/components/jobs/List.vue';
 import {JobsService} from '@/services/JobsService';
+import PaginationControls from '@/components/common/PaginationControls.vue';
 
-const {paginated, nextPage} = usePaginate(
+const {goToPage, nextPage, paginated, prevPage} = usePaginate(
     new JobsService,
 );
 
-await nextPage();
+await goToPage(1);
 </script>
