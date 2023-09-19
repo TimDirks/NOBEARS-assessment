@@ -6,7 +6,7 @@
 
         <div class="mb-2 space-y-1">
             <FilterOption
-                v-for="bucket in sortedBuckets"
+                v-for="bucket in shownBuckets"
                 :key="`${filter.meta.pname}-bucket-${bucket.position}`"
                 :bucket="bucket"
                 :checked="isChecked(bucket.key)"
@@ -71,18 +71,22 @@ const onUpdateModelValue = (bucketKey: string) => {
     emit('update:modelValue', mValue.value);
 };
 
-const canShowMore = computed(() => props.filter.buckets.length > props.minFiltersShown);
-
 const sortedBuckets = computed(() => {
     const {buckets} = props.filter;
 
-    const sortedBuckets = buckets
+    return buckets
         .filter((bucket: IBucket) => bucket.position != null)
         .sort((bucketA: IBucket, bucketB: IBucket) => bucketA.position - bucketB.position);
+});
 
+const shownBuckets = computed(() => {
     return showMore.value
-        ? sortedBuckets
-        : sortedBuckets.slice(0, props.minFiltersShown);
+        ? sortedBuckets.value
+        : sortedBuckets.value.slice(0, props.minFiltersShown);
+});
+
+const canShowMore = computed(() => {
+    return sortedBuckets.value.length > props.minFiltersShown;
 });
 
 const toggleShowMore = () => {
