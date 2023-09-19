@@ -19,22 +19,19 @@ const defaultParams = {
 const usePaginate = <S extends Service>(service: S, customParams: Params = {}) => {
     const {result: paginated, run, state} = useService(service, 'get');
 
-    paginated.value = defaultPaginated as Awaited<ReturnType<S['get']>>;
-    // paginated.value = structuredClone(defaultPaginated) as Awaited<ReturnType<S['get']>>;
+    paginated.value = structuredClone(defaultPaginated) as Awaited<ReturnType<S['get']>>;
 
     const items = ref<Awaited<ReturnType<S['get']>>['hits']>([] as Awaited<ReturnType<S['get']>>['hits']);
 
     const params = ref<Params>({
         ...defaultParams,
-        ...customParams,
-        // ...structuredClone(customParams),
+        ...structuredClone(customParams),
     });
 
     const clear = () => {
         items.value = [];
 
-        paginated.value = defaultPaginated;
-        // paginated.value = structuredClone(defaultPaginated);
+        paginated.value = structuredClone(defaultPaginated);
 
         params.value.pagenum = 0;
     };
@@ -92,9 +89,7 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
         (hits) => {
             items.value = [
                 ...items.value,
-                // ...structuredClone(items.value),
                 ...hits,
-                // ...structuredClone(hits),
             ];
         },
     );

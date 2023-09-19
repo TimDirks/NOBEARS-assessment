@@ -7,6 +7,8 @@ This should give a timeline of what features were build in what order.
 
 To run it, make sure the dependencies are installed before starting the development server.
 
+Keep in mind, at least Node version 17 or higher is required.
+
 ```bash
 yarn install
 
