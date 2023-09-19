@@ -38,7 +38,7 @@ class Job implements JobData {
 class JobsService extends Service<Job> {
     endpoint = 'jobs';
 
-    cast(data: never): Job {
+    cast(data: any): Job {
         const {_source: source} = data;
 
         if (!source || !source.website) {

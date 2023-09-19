@@ -55,7 +55,7 @@ defineEmits<{
     (event: 'previous-page'): void;
 }>();
 
-const canGoNext = computed(() => props.currentPage <= props.totalPages);
+const canGoNext = computed(() => props.currentPage < props.totalPages);
 const canGoPrevious = computed(() => props.currentPage > 1);
 
 // Computed to get which pagination buttons should be displayed.

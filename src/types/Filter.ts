@@ -7,7 +7,7 @@ interface IMeta {
 interface IBucket {
     doc_count: number;
     key: string;
-    position: number;
+    position?: number;
 }
 
 interface IFilter {
@@ -15,4 +15,7 @@ interface IFilter {
     buckets: IBucket[];
 }
 
-export {IFilter};
+export {
+    IBucket,
+    IFilter,
+};

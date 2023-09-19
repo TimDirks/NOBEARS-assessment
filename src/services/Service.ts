@@ -9,13 +9,14 @@ export interface Paginated<T> {
 }
 
 export interface Params {
+    aggs?: boolean;
     f?: Record<string, string[]>;
     pagenum?: number;
     perpage?: number;
     q?: string;
 }
 
-export default abstract class Service<C = never> {
+export default abstract class Service<C = any> {
     /**
      * The endpoint that is used to make HTTP requests.
      */
@@ -24,7 +25,7 @@ export default abstract class Service<C = never> {
     /**
      * Casts the given data to a desired result.
      */
-    cast(data: never): C {
+    cast(data: any): C {
         return data;
     }
 

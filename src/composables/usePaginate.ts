@@ -10,6 +10,7 @@ const defaultPaginated = {
 };
 
 const defaultParams = {
+    aggs: true,
     pagenum: 1,
     perpage: 10,
     f: {},
@@ -36,8 +37,13 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
     });
 
     // Reset the pagination values to their default.
-    const clear = () => {
-        paginated.value = structuredClone(defaultPaginated);
+    const clear = (clearAggregations: boolean = false) => {
+        paginated.value = clearAggregations
+            ? structuredClone(defaultPaginated)
+            : {
+                ...structuredClone(defaultPaginated),
+                aggregations: paginated.value.aggregations,
+            };
 
         params.value.pagenum = 1;
     };
@@ -68,9 +74,9 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
         goToPage(params.value.pagenum + 1);
     };
 
-    // Function to basically return all the variables to their default.
-    const refresh = () => {
-        clear();
+    // Function to basically return all the pagination variables to their default.
+    const refresh = (clearAggregations: boolean = false) => {
+        clear(clearAggregations);
 
         Object.keys(state)
             .forEach(k => state[k] = false);
@@ -81,7 +87,9 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
     // Whenever any of the filters change, the pagination needs to be triggered again with clean values.
     watch(
         () => params.value.f,
-        refresh,
+        () => {
+            refresh();
+        },
         {
             deep: true,
         },
@@ -89,7 +97,9 @@ const usePaginate = <S extends Service>(service: S, customParams: Params = {}) =
 
     watch(
         () => params.value.q,
-        refresh,
+        () => {
+            refresh(true);
+        },
     );
 
     return {
