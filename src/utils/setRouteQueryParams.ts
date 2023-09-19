@@ -2,6 +2,9 @@
 const setRouteQueryParams = ({q, f}) => {
     const router = useRouter();
 
+    const created = new URLSearchParams({q, ...f});
+    console.log(created.toString());
+
     // Loop over the filter object and transform the keys to separate object properties.
     const filterOptions = Object.keys(f)
         .filter(key => f[key].length)
