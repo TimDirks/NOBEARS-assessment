@@ -1,5 +1,5 @@
 <template>
-    <div class="relative rounded border p-8">
+    <div class="relative overflow-hidden rounded border px-8 py-6">
         <div class="font-title text-2xl">
             {{ job.title }}
         </div>
@@ -28,6 +28,13 @@
 
                 {{ job.category.join(', ') }}
             </div>
+        </div>
+
+        <div
+            v-if="job.label"
+            class="absolute right-0 top-0 bg-orange-500 px-4 py-2 text-sm capitalize text-white"
+        >
+            {{ job.label }}
         </div>
     </div>
 </template>
