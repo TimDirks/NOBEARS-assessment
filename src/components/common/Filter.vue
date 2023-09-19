@@ -4,15 +4,27 @@
             {{ filter.meta.label }}
         </div>
 
-        <div class="mb-2 space-y-1">
-            <FilterOption
-                v-for="bucket in shownBuckets"
-                :key="`${filter.meta.pname}-bucket-${bucket.position}`"
-                :bucket="bucket"
-                :checked="isChecked(bucket.key)"
-                class="mx-2"
-                @change="onUpdateModelValue(bucket.key)"
-            />
+        <div class="mb-2">
+            <div
+                v-if="shownBuckets.length"
+                class="space-y-1"
+            >
+                <FilterOption
+                    v-for="bucket in shownBuckets"
+                    :key="`${filter.meta.pname}-bucket-${bucket.position}`"
+                    :bucket="bucket"
+                    :checked="isChecked(bucket.key)"
+                    class="mx-2"
+                    @change="onUpdateModelValue(bucket.key)"
+                />
+            </div>
+
+            <div
+                v-else
+                class="mx-4 italic"
+            >
+                No options found for this filter
+            </div>
         </div>
 
         <div

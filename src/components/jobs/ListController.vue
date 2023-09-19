@@ -45,7 +45,10 @@
                     />
                 </div>
 
-                <div v-if="!paginated.hits.length">
+                <div
+                    v-if="!paginated.hits.length"
+                    class="italic"
+                >
                     We couldn't find any results matching your search criteria.
                 </div>
             </div>
