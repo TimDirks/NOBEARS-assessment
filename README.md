@@ -5,7 +5,9 @@ This should give a timeline of what features were build in what order.
 
 ## Preview development mode
 
-To run it, make sure the dependencies are installed before starting the development server.
+First make a copy of the `.env.example` file and rename it to `.env`. Then add the correct API URL.
+
+To run the app, make sure the dependencies are installed before starting the development server.
 
 Keep in mind, at least Node version 17 or higher is required.
 
